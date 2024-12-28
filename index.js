@@ -1,9 +1,6 @@
-let a = document.createElement("p")
-a.innerText = "Hello World"
-document.getElementById("app").appendChild(a)
 
 // API call to servers of OMDB 
-const movieData = fetch("http://www.omdbapi.com/?i=tt12735488&apikey=8c3131ae")
+let movieData = fetch("http://www.omdbapi.com/?i=tt12735488&apikey=8c3131ae")
 
 // Try
 // movieData.then(response => {
@@ -11,6 +8,33 @@ const movieData = fetch("http://www.omdbapi.com/?i=tt12735488&apikey=8c3131ae")
 //     })
 // })
 
+const input = document.createElement("input");
+//input.setAttribute("text");
+
+const button = document.createElement("button");
+button.innerText = "Go!";
+
+
+document.getElementById("app").appendChild(input); 
+
+const btnfunc = function(e){
+console.log("acv", e);
+console.log(input.value);
+movieData = fetch(`http://www.omdbapi.com/?i=${input.value}&apikey=8c3131ae`);
+let newApp = document.getElementById("app")
+while(newApp.firstChild){
+    newApp.removeChild(newApp.firstChild);
+}
+document.getElementById("app").appendChild(input);
+button.addEventListener("click", btnfunc);
+document.getElementById("app").appendChild(button);
+
+app();
+}
+
+
+button.addEventListener("click", btnfunc);
+document.getElementById("app").appendChild(button);
 
 async function app () {
     let response = await movieData;
